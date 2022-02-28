@@ -7,8 +7,8 @@ import Loader from "./Loader";
 function MyMain() {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [endPost, setEndPost] = useState(10);
-
+  const [isLoadingg, setIsLoadingg] = useState(true);
+  const [selectedJob, setSelectedJob] = useState(null);
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -28,18 +28,6 @@ function MyMain() {
     fetchJobs();
   }, []);
 
-  const showMore = (number) => {
-    if (jobs.length > 10) {
-      setEndPost(endPost + 10);
-    }
-  };
-
-  const showLess = (number) => {
-    if (endPost > 10) {
-      setEndPost(endPost - 10);
-    }
-  };
-
   return (
     <div>
       <MyHeader />
@@ -49,7 +37,7 @@ function MyMain() {
             {isLoading ? (
               <Loader />
             ) : (
-              jobs.data.slice(0, endPost).map((job) => {
+              jobs.data.slice(0, 20).map((job) => {
                 return (
                   <div className="left-jobs-div my-4 py-2 px-5" key={job.id}>
                     <h5 className="mb-0" style={{ textAlign: "start" }}>
@@ -61,7 +49,15 @@ function MyMain() {
                         <span className="text-muted">Category:</span>{" "}
                         {job.category}
                       </p>
-                      <Button variant="secondary" size="sm">
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        className="shadow-none"
+                        onClick={() => {
+                          setSelectedJob(job);
+                          setIsLoadingg(false);
+                        }}
+                      >
                         View Details
                       </Button>
                     </div>
@@ -69,20 +65,24 @@ function MyMain() {
                 );
               })
             )}
-            <div className="mb-4">
-              <Button
-                className="mr-3"
-                variant="secondary"
-                onClick={(e) => showMore(+10)}
-              >
-                Show More
-              </Button>
-              <Button variant="secondary" onClick={(e) => showLess(-10)}>
-                Show Less
-              </Button>
-            </div>
           </Col>
-          <Col md={6}>ji</Col>
+          <Col md={6}>
+            {isLoadingg ? (
+              ""
+            ) : (
+              <div className="mt-4 px-3">
+                <div className="d-flex justify-content-between align-items-center px-5 pb-4">
+                  <h6 className="mb-0">{selectedJob.title}</h6>
+                  <Button variant="primary" size="sm">
+                    Add
+                  </Button>
+                </div>
+                <p
+                  dangerouslySetInnerHTML={{ __html: selectedJob.description }}
+                ></p>
+              </div>
+            )}
+          </Col>
         </Row>
       </Container>
     </div>
