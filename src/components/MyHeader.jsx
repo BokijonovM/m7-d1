@@ -13,9 +13,6 @@ function MyHeader() {
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
           </Nav>
-          <Button variant="primary" size="sm" onClick={() => navigate("/cart")}>
-            View
-          </Button>
         </Navbar.Collapse>
       </Navbar>
     </div>

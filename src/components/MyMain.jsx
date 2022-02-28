@@ -8,10 +8,12 @@ import {
   FormControl,
 } from "react-bootstrap";
 import "./style.css";
-import MyHeader from "./MyHeader";
 import Loader from "./Loader";
+import { useNavigate } from "react-router-dom";
 
 function MyMain({ addToCart }) {
+  const navigate = useNavigate();
+
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingg, setIsLoadingg] = useState(true);
@@ -39,7 +41,6 @@ function MyMain({ addToCart }) {
 
   return (
     <div>
-      <MyHeader />
       <Container fluid>
         <Row className="m-2">
           <Form inline>
@@ -62,7 +63,9 @@ function MyMain({ addToCart }) {
                   if (searchName === "") {
                     return value;
                   } else if (
-                    value.title.toLowerCase().includes(searchName.toLowerCase())
+                    value.company_name
+                      .toLowerCase()
+                      .includes(searchName.toLowerCase())
                   ) {
                     return value;
                   }
@@ -106,9 +109,10 @@ function MyMain({ addToCart }) {
                   <Button
                     variant="primary"
                     size="sm"
-                    onClick={() => addToCart(selectedJob)}
+                    // onClick={() => addToCart(selectedJob)}
+                    onClick={() => navigate("cart")}
                   >
-                    Add
+                    View
                   </Button>
                 </div>
                 <p
