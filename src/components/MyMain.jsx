@@ -11,7 +11,7 @@ import "./style.css";
 import MyHeader from "./MyHeader";
 import Loader from "./Loader";
 
-function MyMain() {
+function MyMain({ addToCart }) {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingg, setIsLoadingg] = useState(true);
@@ -103,7 +103,11 @@ function MyMain() {
               <div className="mt-4 px-3">
                 <div className="d-flex justify-content-between align-items-center px-5 pb-4">
                   <h6 className="mb-0">{selectedJob.title}</h6>
-                  <Button variant="primary" size="sm">
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => addToCart(selectedJob)}
+                  >
                     Add
                   </Button>
                 </div>

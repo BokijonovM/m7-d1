@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar, Button } from "react-bootstrap";
 
 function MyHeader() {
   return (
@@ -12,6 +12,9 @@ function MyHeader() {
             <Nav.Link href="#home">Home</Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        <Button variant="primary" size="sm">
+          View
+        </Button>
       </Navbar>
     </div>
   );
