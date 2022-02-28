@@ -110,7 +110,7 @@ function MyMain({ addToCart }) {
                     variant="primary"
                     size="sm"
                     // onClick={() => addToCart(selectedJob)}
-                    onClick={() => navigate("cart")}
+                    onClick={() => navigate(`/${selectedJob.company_name}`)}
                   >
                     View
                   </Button>

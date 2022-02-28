@@ -42,7 +42,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<MyMain addToCart={addToCartWithQty} />} />
           <Route
-            path="/cart"
+            path="/:company"
             element={
               <Cart cart={cart} removeFromCart={removeFromCartWithQty} />
             }
