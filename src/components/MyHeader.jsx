@@ -3,7 +3,6 @@ import { Nav, Navbar, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function MyHeader() {
-  const navigate = useNavigate();
   return (
     <div>
       <Navbar bg="light" expand="lg">
