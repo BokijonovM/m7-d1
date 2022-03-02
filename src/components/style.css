@@ -13,3 +13,8 @@
   background-color: rgb(95, 95, 95) !important;
   margin-left: 5px !important;
 }
+.fav-job-li {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+}

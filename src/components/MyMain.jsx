@@ -11,6 +11,7 @@ import "./style.css";
 import { connect } from "react-redux";
 import { addToCartAction } from "../redux/action";
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 const mapStateToProps = (state) => ({
   cartLength: state.cart.jobs.length,
@@ -82,18 +83,20 @@ class MyMain extends Component {
               Search
             </Button>
             <div className="ml-auto">
-              <Button
-                className="ml-2 shadow-none fav-btn"
-                variant="primary"
-                href="/fav"
-                // size="sm"
-                // onClick={() => ("/fav")}
-              >
-                Favorites
-                <Badge size="lg" className="barge-fav" variant="info">
-                  {this.props.cartLength}
-                </Badge>
-              </Button>
+              <Link to="/fav">
+                <Button
+                  className="ml-2 shadow-none fav-btn"
+                  variant="primary"
+                  // href="/fav"
+                  // size="sm"
+                  // onClick={() => ("/fav")}
+                >
+                  Favorites
+                  <Badge size="lg" className="barge-fav" variant="info">
+                    {this.props.cartLength}
+                  </Badge>
+                </Button>
+              </Link>
             </div>
           </Row>
           <Row>
