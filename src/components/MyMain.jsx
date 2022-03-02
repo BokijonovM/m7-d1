@@ -20,24 +20,22 @@ function MyMain({ addToCart }) {
   const [selectedJob, setSelectedJob] = useState(null);
   const [searchName, setSearchName] = useState("");
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        let res = await fetch("https://strive-jobs-api.herokuapp.com/jobs");
-        if (res.ok) {
-          let data = await res.json();
-          console.log(data);
-          setJobs(data);
-          setIsLoading(false);
-        } else {
-          console.log("error fetching!");
-        }
-      } catch (error) {
-        console.log("Error fetching", error);
+  const fetchJobs = async () => {
+    try {
+      let res = await fetch(
+        `https://strive-jobs-api.herokuapp.com/jobs?company=${searchName}`
+      );
+      if (res.ok) {
+        let data = await res.json();
+        setJobs(data);
+        setIsLoading(false);
+      } else {
+        console.log("error fetching!");
       }
-    };
-    fetchJobs();
-  }, []);
+    } catch (error) {
+      console.log("Error fetching", error);
+    }
+  };
 
   return (
     <div>
@@ -51,25 +49,33 @@ function MyMain({ addToCart }) {
               className="mr-sm-2 shadow-none"
             />
           </Form>
+          <Button
+            className="ml-2 shadow-none"
+            variant="primary"
+            onClick={fetchJobs}
+          >
+            Search
+          </Button>
         </Row>
         <Row>
           <Col md={5}>
             {isLoading ? (
-              <Loader />
+              // <Loader />
+              <h6>Search for company names</h6>
             ) : (
               jobs.data
-                .slice(0, 20)
-                .filter((value) => {
-                  if (searchName === "") {
-                    return value;
-                  } else if (
-                    value.company_name
-                      .toLowerCase()
-                      .includes(searchName.toLowerCase())
-                  ) {
-                    return value;
-                  }
-                })
+                // .slice(0, 20)
+                // .filter((value) => {
+                //   if (searchName === "") {
+                //     return value;
+                //   } else if (
+                //     value.company_name
+                //       .toLowerCase()
+                //       .includes(searchName.toLowerCase())
+                //   ) {
+                //     return value;
+                //   }
+                // })
                 .map((job) => {
                   return (
                     <div className="left-jobs-div my-4 py-2 px-5" key={job.id}>
@@ -106,14 +112,19 @@ function MyMain({ addToCart }) {
               <div className="mt-4 px-3">
                 <div className="d-flex justify-content-between align-items-center px-5 pb-4">
                   <h6 className="mb-0">{selectedJob.title}</h6>
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    // onClick={() => addToCart(selectedJob)}
-                    onClick={() => navigate(`/${selectedJob.company_name}`)}
-                  >
-                    View
-                  </Button>
+                  <div className="d-flex">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      // onClick={() => addToCart(selectedJob)}
+                      onClick={() => navigate(`/${selectedJob.company_name}`)}
+                    >
+                      View Similar Jobs
+                    </Button>
+                    <Button size="sm" variant="primary" className="ml-2">
+                      Add
+                    </Button>
+                  </div>
                 </div>
                 <p
                   dangerouslySetInnerHTML={{ __html: selectedJob.description }}
