@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MyMain from "./components/MyMain";
 import Cart from "./components/Cart";
 import MyHeader from "./components/MyHeader";
+import MyFav from "./components/MyFav";
 
 const App = () => {
   const [cart, setCart] = useState([]);
@@ -41,6 +42,7 @@ const App = () => {
         <MyHeader />
         <Routes>
           <Route path="/" element={<MyMain addToCart={addToCartWithQty} />} />
+          <Route path="/fav" element={<MyFav />} />
           <Route
             path="/:company"
             element={

@@ -3,6 +3,7 @@ import { Nav, Navbar, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function MyHeader() {
+  const navigate = useNavigate();
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -12,6 +13,14 @@ function MyHeader() {
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
           </Nav>
+          <Button
+            className="ml-2 shadow-none"
+            variant="primary"
+            size="sm"
+            onclick={() => navigate("/fav")}
+          >
+            Favorites
+          </Button>
         </Navbar.Collapse>
       </Navbar>
     </div>
