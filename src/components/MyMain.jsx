@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Row,
   Col,
@@ -8,7 +8,6 @@ import {
   FormControl,
 } from "react-bootstrap";
 import "./style.css";
-import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
 
 function MyMain({ addToCart }) {
