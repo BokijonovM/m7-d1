@@ -17,7 +17,7 @@ function MyHeader() {
             className="ml-2 shadow-none"
             variant="primary"
             size="sm"
-            onclick={() => navigate("/fav")}
+            onClick={() => navigate("/fav")}
           >
             Favorites
           </Button>
