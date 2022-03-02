@@ -27,7 +27,6 @@ function MyMain({ addToCart }) {
       );
       if (res.ok) {
         let data = await res.json();
-        console.log(data);
         setJobs(data);
         setIsLoading(false);
       } else {
@@ -50,28 +49,33 @@ function MyMain({ addToCart }) {
               className="mr-sm-2 shadow-none"
             />
           </Form>
-          <Button className="ml-2" variant="primary" onClick={fetchJobs}>
+          <Button
+            className="ml-2 shadow-none"
+            variant="primary"
+            onClick={fetchJobs}
+          >
             Search
           </Button>
         </Row>
         <Row>
           <Col md={5}>
             {isLoading ? (
-              <Loader />
+              // <Loader />
+              <h6>Search for company names</h6>
             ) : (
               jobs.data
-                .slice(0, 20)
-                .filter((value) => {
-                  if (searchName === "") {
-                    return value;
-                  } else if (
-                    value.company_name
-                      .toLowerCase()
-                      .includes(searchName.toLowerCase())
-                  ) {
-                    return value;
-                  }
-                })
+                // .slice(0, 20)
+                // .filter((value) => {
+                //   if (searchName === "") {
+                //     return value;
+                //   } else if (
+                //     value.company_name
+                //       .toLowerCase()
+                //       .includes(searchName.toLowerCase())
+                //   ) {
+                //     return value;
+                //   }
+                // })
                 .map((job) => {
                   return (
                     <div className="left-jobs-div my-4 py-2 px-5" key={job.id}>
