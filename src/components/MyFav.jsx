@@ -35,7 +35,10 @@ function MyFav({ cart, cartLength, removeFromCart }) {
                   </Button>
                   <div className="d-flex flex-column align-items-start ml-3">
                     <h5 className="mb-0">{job.title}</h5>
-                    <p className="mb-0">{job.company_name}</p>
+                    <p className="mb-0">
+                      <span className="text-muted">Company:</span>{" "}
+                      {job.company_name}
+                    </p>
                   </div>
                 </li>
               ))}
