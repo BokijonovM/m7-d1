@@ -3,3 +3,13 @@
   border: 1px solid black;
   border-radius: 10px;
 }
+.fav-btn {
+  position: relative !important;
+}
+.barge-fav {
+  position: absolute !important;
+  top: -6px !important;
+  right: -6px !important;
+  background-color: rgb(95, 95, 95) !important;
+  margin-left: 5px !important;
+}

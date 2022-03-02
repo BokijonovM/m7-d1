@@ -1,9 +1,8 @@
 import React from "react";
-import { Nav, Navbar, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Nav, Navbar } from "react-bootstrap";
+import "./style.css";
 
-function MyHeader() {
-  const navigate = useNavigate();
+function MyHeader(props) {
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -13,14 +12,6 @@ function MyHeader() {
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
           </Nav>
-          <Button
-            className="ml-2 shadow-none"
-            variant="primary"
-            size="sm"
-            onClick={() => navigate("/fav")}
-          >
-            Favorites
-          </Button>
         </Navbar.Collapse>
       </Navbar>
     </div>

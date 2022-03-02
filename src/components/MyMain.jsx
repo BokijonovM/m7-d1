@@ -6,11 +6,25 @@ import {
   Button,
   Form,
   FormControl,
+  Badge,
 } from "react-bootstrap";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { addToCartAction } from "../redux/action";
+// import { Component } from "react";
 
-function MyMain({ addToCart }) {
+const mapStateToProps = (state) => ({
+  cartLength: state.cart.jobs.length,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: (jobToAdd) => {
+    dispatch(addToCartAction(jobToAdd));
+  },
+});
+
+function MyMain(props) {
   const navigate = useNavigate();
 
   const [jobs, setJobs] = useState([]);
@@ -55,6 +69,19 @@ function MyMain({ addToCart }) {
           >
             Search
           </Button>
+          <div className="ml-auto">
+            <Button
+              className="ml-2 shadow-none fav-btn"
+              variant="primary"
+              // size="sm"
+              onClick={() => navigate("/fav")}
+            >
+              Favorites
+              <Badge size="lg" className="barge-fav" variant="info">
+                {props.cartLength}
+              </Badge>
+            </Button>
+          </div>
         </Row>
         <Row>
           <Col md={5}>
@@ -115,12 +142,16 @@ function MyMain({ addToCart }) {
                     <Button
                       variant="primary"
                       size="sm"
-                      // onClick={() => addToCart(selectedJob)}
                       onClick={() => navigate(`/${selectedJob.company_name}`)}
                     >
                       View Similar Jobs
                     </Button>
-                    <Button size="sm" variant="primary" className="ml-2">
+                    <Button
+                      size="sm"
+                      variant="primary"
+                      className="ml-2"
+                      onClick={() => this.addToCart(selectedJob)}
+                    >
                       Add
                     </Button>
                   </div>
@@ -137,4 +168,4 @@ function MyMain({ addToCart }) {
   );
 }
 
-export default MyMain;
+export default connect(mapStateToProps, mapDispatchToProps)(MyMain);
