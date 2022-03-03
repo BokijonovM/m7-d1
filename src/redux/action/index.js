@@ -41,10 +41,10 @@ export const getJobsAction = () => {
         );
         if (response.ok) {
           let data = await response.json();
-          console.log("Jobs IN ACTION CREATOR", data);
+          console.log("Jobs IN ACTION CREATOR", data.data);
           dispatch({
             type: GET_JOBS,
-            payload: data,
+            payload: data.data,
           });
           dispatch({
             type: GET_JOBS_LOADING,
