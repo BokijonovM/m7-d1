@@ -18,3 +18,15 @@
   border-radius: 10px;
   padding: 5px;
 }
+.fav-btn-1 {
+  position: fixed !important;
+  bottom: 40px;
+  right: 40px;
+}
+.barge-fav-1 {
+  position: absolute !important;
+  top: -6px !important;
+  right: -6px !important;
+  background-color: rgb(95, 95, 95) !important;
+  margin-left: 5px !important;
+}

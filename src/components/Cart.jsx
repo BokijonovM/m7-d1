@@ -1,10 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col } from "react-bootstrap";
+import { Button, Col, Badge } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { connect } from "react-redux";
+import { addToCartActionWithThunk } from "../redux/action";
+import { useNavigate } from "react-router-dom";
 
-function Cart({ cart, removeFromCart }) {
+const mapStateToProps = (state) => ({
+  cartLength: state.cart.jobs.length,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: (jobToAdd) => {
+    dispatch(addToCartActionWithThunk(jobToAdd));
+  },
+});
+
+function Cart({ addToCart, cartLength }) {
   const params = useParams();
   const [cartJob, setCartJob] = useState([]);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,13 +54,32 @@ function Cart({ cart, removeFromCart }) {
                 <p className="mb-0">
                   <span className="text-muted">Category:</span> {job.category}
                 </p>
+
+                <Button
+                  size="sm"
+                  variant="primary"
+                  className="ml-2 shadow-none"
+                  onClick={() => addToCart(job)}
+                >
+                  Add
+                </Button>
               </div>
             </div>
           </Col>
         );
       })}
+      <Button
+        className="ml-2 shadow-none fav-btn-1"
+        variant="primary"
+        onClick={() => navigate("/fav")}
+      >
+        Favorites
+        <Badge size="lg" className="barge-fav-1" variant="info">
+          {cartLength}
+        </Badge>
+      </Button>
     </div>
   );
 }
 
-export default Cart;
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
