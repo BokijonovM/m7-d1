@@ -12,14 +12,20 @@ import { connect } from "react-redux";
 import { addToCartAction } from "../redux/action";
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import { getJobsAction } from "../redux/action";
 
 const mapStateToProps = (state) => ({
   cartLength: state.cart.jobs.length,
+  jobsFromReduxStore: state.job.stock,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addToCart: (jobToAdd) => {
     dispatch(addToCartAction(jobToAdd));
+  },
+  getJobs: () => {
+    console.log("in mapDispatchToProps");
+    dispatch(getJobsAction());
   },
 });
 
@@ -40,25 +46,48 @@ class MyMain extends Component {
   // const [selectedJob, setSelectedJob] = useState(null);
   // const [searchName, setSearchName] = useState("");
 
-  fetchJobs = async () => {
-    try {
-      let res = await fetch(
-        `https://strive-jobs-api.herokuapp.com/jobs?company=${this.state.searchName}`
-      );
-      if (res.ok) {
-        let data = await res.json();
-        this.setState({
-          jobs: data.data,
-          isLoading: false,
-        });
-        // setJobs(data);
-        // setIsLoading(false);
-      } else {
-        console.log("error fetching!");
-      }
-    } catch (error) {
-      console.log("Error fetching", error);
-    }
+  // fetchJobs = async () => {
+  //   try {
+  //     let res = await fetch(
+  //       `https://strive-jobs-api.herokuapp.com/jobs?company=${this.state.searchName}`
+  //     );
+  //     if (res.ok) {
+  //       let data = await res.json();
+  //       this.setState({
+  //         jobs: data.data,
+  //         isLoading: false,
+  //       });
+  //       // setJobs(data);
+  //       // setIsLoading(false);
+  //     } else {
+  //       console.log("error fetching!");
+  //     }
+  //   } catch (error) {
+  //     console.log("Error fetching", error);
+  //   }
+  // };
+
+  componentDidMount = async () => {
+    // try {
+    //   let res = await fetch(
+    //     `https://strive-jobs-api.herokuapp.com/jobs?company=${this.state.searchName}`
+    //   );
+    //   if (res.ok) {
+    //     let data = await res.json();
+    //     this.setState({
+    //       jobs: data.data,
+    //       isLoading: false,
+    //     });
+    //     // setJobs(data);
+    //     // setIsLoading(false);
+    //   } else {
+    //     console.log("error fetching!");
+    //   }
+    // } catch (error) {
+    //   console.log("Error fetching", error);
+    // }
+    console.log("this.props", this.props);
+    this.props.getJobs();
   };
 
   render() {

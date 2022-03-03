@@ -1,7 +1,7 @@
 import { initialState } from "../store";
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../action";
 
-const mainReducer = (state = initialState, action) => {
+const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       return {
@@ -28,4 +28,4 @@ const mainReducer = (state = initialState, action) => {
   }
 };
 
-export default mainReducer;
+export default cartReducer;
