@@ -80,7 +80,10 @@ class MyMain extends Component {
                 // <Loader />
                 <h6>Search for company names</h6>
               ) : (
-                <MyJobs jobs={this.props.jobsFromReduxStore} />
+                <MyJobs
+                  jobs={this.props.jobsFromReduxStore}
+                  searchName={this.state.searchName}
+                />
               )}
             </Col>
           </Row>

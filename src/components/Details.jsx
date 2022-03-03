@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCartActionWithThunk } from "../redux/action";
 
@@ -20,13 +20,11 @@ function Details({ selectedJob, addToCart }) {
           <div className="d-flex justify-content-between align-items-center px-5 pb-4">
             <h6 className="mb-0">{selectedJob.title}</h6>
             <div className="d-flex">
-              <Button
-                variant="primary"
-                size="sm"
-                href={`/${selectedJob.company_name}`}
-              >
-                View Similar Jobs
-              </Button>
+              <Link to={`/${selectedJob.company_name}`}>
+                <Button variant="primary" size="sm">
+                  View Similar Jobs
+                </Button>
+              </Link>
               <Button
                 size="sm"
                 variant="primary"
