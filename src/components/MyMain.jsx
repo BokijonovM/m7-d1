@@ -51,7 +51,7 @@ class MyMain extends Component {
     return (
       <div>
         <Container fluid>
-          <Row className="m-2">
+          <Row className="m-2 align-items-center">
             <Form inline>
               <FormControl
                 type="text"
@@ -60,9 +60,16 @@ class MyMain extends Component {
                 className="mr-sm-2 shadow-none"
               />
             </Form>
-            <Button className="ml-2 shadow-none" variant="primary">
+            <Button className="mx-2 shadow-none" variant="primary">
               Search
             </Button>
+            <Form.Group controlId="exampleForm.ControlSelect1">
+              <Form.Control className="shadow-none" as="select">
+                <option>Company Name</option>
+                <option>Job Title</option>
+                <option>City</option>
+              </Form.Control>
+            </Form.Group>
             <div className="ml-auto">
               <Link to="/fav">
                 <Button className="ml-2 shadow-none fav-btn" variant="primary">
