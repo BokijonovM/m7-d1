@@ -37,7 +37,7 @@ export const getJobsAction = () => {
     setTimeout(async () => {
       try {
         let response = await fetch(
-          "https://strive-jobs-api.herokuapp.com/jobs"
+          "https://strive-jobs-api.herokuapp.com/jobs?category=writing&limit=10"
         );
         if (response.ok) {
           let data = await response.json();
