@@ -10,7 +10,6 @@ import {
 import "./style.css";
 import { connect } from "react-redux";
 import { addToCartActionWithThunk } from "../redux/action";
-import { Component } from "react";
 import { Link } from "react-router-dom";
 import { getJobsAction } from "../redux/action";
 import MyJobs from "./MyJobs";
