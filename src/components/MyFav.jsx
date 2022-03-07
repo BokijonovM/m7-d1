@@ -1,20 +1,12 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
 import { removeFromCartAction } from "../redux/action";
 import { Row, Col, Container, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 
-const mapStateToProps = (state) => ({
-  cart: state.cart.jobs,
-  cartLength: state.cart.jobs.length,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  removeFromCart: (index) => {
-    dispatch(removeFromCartAction(index));
-  },
-});
-
-function MyFav({ cart, cartLength, removeFromCart }) {
+function MyFav() {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.jobs);
+  const cartLength = useSelector((state) => state.cart.jobs.length);
   return (
     <div>
       <Container>
@@ -29,7 +21,7 @@ function MyFav({ cart, cartLength, removeFromCart }) {
                   <Button
                     className="ml-2"
                     variant="danger"
-                    onClick={() => removeFromCart(i)}
+                    onClick={() => dispatch(removeFromCartAction(i))}
                   >
                     Delete
                   </Button>
@@ -53,4 +45,4 @@ function MyFav({ cart, cartLength, removeFromCart }) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyFav);
+export default MyFav;
