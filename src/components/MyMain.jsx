@@ -33,9 +33,10 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 function MyMain({ getJobs, cartLength, jobsFromReduxStore }) {
-  const [selectedJob, setSelectedJob] = useState(null);
   const [searchName, setSearchName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getJobs();
