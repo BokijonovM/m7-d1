@@ -8,7 +8,6 @@ import {
   Badge,
 } from "react-bootstrap";
 import "./style.css";
-import { connect } from "react-redux";
 import { addToCartActionWithThunk } from "../redux/action";
 import { Link } from "react-router-dom";
 import { getJobsAction } from "../redux/action";
@@ -16,31 +15,19 @@ import MyJobs from "./MyJobs";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 
-const mapStateToProps = (state) => ({
-  cartLength: state.cart.jobs.length,
-  jobsFromReduxStore: state.job.stock,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  addToCart: (jobToAdd) => {
-    dispatch(addToCartActionWithThunk(jobToAdd));
-  },
-  getJobs: () => {
-    console.log("in mapDispatchToProps");
-    dispatch(getJobsAction());
-  },
-});
-
-function MyMain({ getJobs, cartLength, jobsFromReduxStore }) {
+function MyMain() {
   const [searchName, setSearchName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getJobs();
+    dispatch(getJobsAction());
     setIsLoading(false);
   }, []);
+
+  const cartLength = useSelector((state) => state.cart.jobs.length);
+  const jobsFromReduxStore = useSelector((state) => state.job.stock);
 
   return (
     <div>
@@ -90,4 +77,4 @@ function MyMain({ getJobs, cartLength, jobsFromReduxStore }) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyMain);
+export default MyMain;
