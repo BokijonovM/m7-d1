@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCartActionWithThunk } from "../redux/action";
+import { useDispatch } from "react-redux";
 
 const mapStateToProps = (state) => ({});
 
@@ -13,6 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 function Details({ selectedJob, addToCart }) {
+  const dispatch = useDispatch();
   return (
     <div>
       {selectedJob ? (
@@ -29,7 +31,7 @@ function Details({ selectedJob, addToCart }) {
                 size="sm"
                 variant="primary"
                 className="ml-2 shadow-none"
-                onClick={() => addToCart(selectedJob)}
+                onClick={() => dispatch(addToCartActionWithThunk(selectedJob))}
               >
                 Add
               </Button>
@@ -48,4 +50,4 @@ function Details({ selectedJob, addToCart }) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Details);
+export default Details;
