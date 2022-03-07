@@ -1,26 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import { addToCartActionWithThunk } from "../redux/action";
+import { useSelector, useDispatch } from "react-redux";
 
-const mapStateToProps = (state) => ({});
+function Details({ selectedJob }) {
+  const [job, setJob] = useState(null);
+  const dispatch = useDispatch();
 
-const mapDispatchToProps = (dispatch) => ({
-  addToCart: (jobToAdd) => {
-    dispatch(addToCartActionWithThunk(jobToAdd));
-  },
-});
+  useEffect(() => {
+    setJob(selectedJob);
+  }, [selectedJob]);
 
-function Details({ selectedJob, addToCart }) {
+  const jobsInCart = useSelector((state) => state.cart.jobs);
+  const isAlreadyInCart = jobsInCart.find((j) => j.id === job?.id);
   return (
     <div>
-      {selectedJob ? (
+      {job ? (
         <div className="mt-4 px-3">
           <div className="d-flex justify-content-between align-items-center px-5 pb-4">
-            <h6 className="mb-0">{selectedJob.title}</h6>
+            <h6 className="mb-0">{job.title}</h6>
             <div className="d-flex">
-              <Link to={`/${selectedJob.company_name}`}>
+              <Link to={`/${job.company_name}`}>
                 <Button variant="primary" size="sm">
                   View Similar Jobs
                 </Button>
@@ -29,15 +30,16 @@ function Details({ selectedJob, addToCart }) {
                 size="sm"
                 variant="primary"
                 className="ml-2 shadow-none"
-                onClick={() => addToCart(selectedJob)}
+                onClick={() => dispatch(addToCartActionWithThunk(job))}
+                disabled={isAlreadyInCart}
               >
-                Add
+                {isAlreadyInCart ? "Added" : "Add"}
               </Button>
             </div>
           </div>
           <p
             dangerouslySetInnerHTML={{
-              __html: selectedJob.description,
+              __html: job.description,
             }}
           ></p>
         </div>
@@ -48,4 +50,4 @@ function Details({ selectedJob, addToCart }) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Details);
+export default Details;

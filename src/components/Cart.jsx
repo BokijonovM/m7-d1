@@ -1,25 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Badge } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { connect } from "react-redux";
 import { addToCartActionWithThunk } from "../redux/action";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
-const mapStateToProps = (state) => ({
-  cartLength: state.cart.jobs.length,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  addToCart: (jobToAdd) => {
-    dispatch(addToCartActionWithThunk(jobToAdd));
-  },
-});
-
-function Cart({ addToCart, cartLength }) {
+function Cart() {
   const params = useParams();
   const [cartJob, setCartJob] = useState([]);
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +32,9 @@ function Cart({ addToCart, cartLength }) {
     };
     fetchData();
   }, []);
+
+  const jobsInCart = useSelector((state) => state.cart.jobs);
+  const cartLength = useSelector((state) => state.cart.jobs.length);
   return (
     <div className="d-flex justify-content-center">
       {cartJob.map((job) => {
@@ -59,7 +54,7 @@ function Cart({ addToCart, cartLength }) {
                   size="sm"
                   variant="primary"
                   className="ml-2 shadow-none"
-                  onClick={() => addToCart(job)}
+                  onClick={() => dispatch(addToCartActionWithThunk(job))}
                 >
                   Add
                 </Button>
@@ -82,4 +77,4 @@ function Cart({ addToCart, cartLength }) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default Cart;
