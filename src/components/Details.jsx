@@ -5,15 +5,15 @@ import { connect } from "react-redux";
 import { addToCartActionWithThunk } from "../redux/action";
 import { useDispatch } from "react-redux";
 
-const mapStateToProps = (state) => ({});
+// const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({
-  addToCart: (jobToAdd) => {
-    dispatch(addToCartActionWithThunk(jobToAdd));
-  },
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   addToCart: (jobToAdd) => {
+//     dispatch(addToCartActionWithThunk(jobToAdd));
+//   },
+// });
 
-function Details({ selectedJob, addToCart }) {
+function Details({ selectedJob }) {
   const dispatch = useDispatch();
   return (
     <div>
